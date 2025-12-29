@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alim Game WebView Download Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      color: #003366;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #0055aa;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+    }
+    select, button {
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .hidden { display: none; }
+    .download-options button {
+      margin: 5px;
+      background: #0055aa;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .download-options button:hover {
+      background: #003366;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="title">Alim Game WebView Download Page</h1>
+
+    <div>
+      <label for="language">Language / Dil:</label>
+      <select id="language" onchange="changeLanguage()">
+        <option value="en-GB">English (UK)</option>
+        <option value="en-US">English (US)</option>
+        <option value="tr-TR">Türkçe</option>
+      </select>
+    </div>
+
+    <div>
+      <label id="platformLabel" for="platform">Select Platform:</label>
+      <select id="platform" onchange="showOptions()">
+        <option value="">--</option>
+        <option value="android">Android</option>
+        <option value="windows">Windows</option>
+      </select>
+    </div>
+
+    <div id="android-options" class="download-options hidden">
+      <h3 id="androidTitle">Android Downloads</h3>
+      <button onclick="download('android-dev')">Download Developer Code</button>
+      <button onclick="download('apk-user')">Download APK (User)</button>
+      <button onclick="download('apk-tester')">Download APK (Tester)</button>
+      <button onclick="download('apk-test')">Download APK (Android Test)</button>
+    </div>
+
+    <div id="windows-options" class="download-options hidden">
+      <h3 id="windowsTitle">Windows Downloads</h3>
+      <button onclick="download('windows-dev')">Download Developer Code</button>
+      <button onclick="download('windows-zip')">Download ZIP Package</button>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      "en-GB": {
+        title: "Alim Game WebView Download Page",
+        platformLabel: "Select Platform:",
+        androidTitle: "Android Downloads",
+        windowsTitle: "Windows Downloads"
+      },
+      "en-US": {
+        title: "Alim Game WebView Download Page",
+        platformLabel: "Select Platform:",
+        androidTitle: "Android Downloads",
+        windowsTitle: "Windows Downloads"
+      },
+      "tr-TR": {
+        title: "Alim Oyun WebView İndirme Sayfası",
+        platformLabel: "Platform Seçin:",
+        androidTitle: "Android İndirmeleri",
+        windowsTitle: "Windows İndirmeleri"
+      }
+    };
+
+    function changeLanguage() {
+      const lang = document.getElementById("language").value;
+      document.getElementById("title").innerText = translations[lang].title;
+      document.getElementById("platformLabel").innerText = translations[lang].platformLabel;
+      document.getElementById("androidTitle").innerText = translations[lang].androidTitle;
+      document.getElementById("windowsTitle").innerText = translations[lang].windowsTitle;
+    }
+
+    function showOptions() {
+      const platform = document.getElementById("platform").value;
+      document.getElementById("android-options").classList.add("hidden");
+      document.getElementById("windows-options").classList.add("hidden");
+      if (platform === "android") {
+        document.getElementById("android-options").classList.remove("hidden");
+      } else if (platform === "windows") {
+        document.getElementById("windows-options").classList.remove("hidden");
+      }
+    }
+
+    function download(type) {
+      alert("Download triggered for: " + type);
+      // Burada gerçek dosya linklerini koyabilirsin
+      // örn: window.location.href = "downloads/" + type + ".zip";
+    }
+  </script>
+</body>
+</html>
